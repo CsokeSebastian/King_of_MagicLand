@@ -1,10 +1,4 @@
-from text_functions import IntroMessages
-from playsound import playsound
-
-
-
-def play_main_menu_sound():
-    playsound('Main_Menu.wav', False)
+from text_and_sounds_functions import *
 
 
 def if_want_to_play():
@@ -32,6 +26,6 @@ def if_want_to_play():
                 # exit_game()
 
 
-play_main_menu_sound()
+Sounds.main_menu_sound()
 IntroMessages.intro_msg()
 if_want_to_play()

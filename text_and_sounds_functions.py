@@ -1,3 +1,6 @@
+import winsound
+
+
 class IntroMessages:
 
     @staticmethod
@@ -35,3 +38,20 @@ class IntroMessages:
         print("My dear archer, you, with your bow and skills\n"
                 "are going to save MagicLand from the evil beasts that\n"
                 "will cross your path in this journey!\n")
+
+# Sound functions:
+
+
+class Sounds:
+
+    @staticmethod
+    def main_menu_sound():
+        winsound.PlaySound('Main_Menu.wav', winsound.SND_LOOP + winsound.SND_ASYNC)
+
+    @staticmethod
+    def exploring_sound():
+        winsound.PlaySound('Exploring.wav', winsound.SND_LOOP + winsound.SND_ASYNC)
+
+    @staticmethod
+    def battle_sound():
+        winsound.PlaySound('BattleFinal.wav', winsound.SND_LOOP + winsound.SND_ASYNC)
