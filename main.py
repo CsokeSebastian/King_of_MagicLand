@@ -1,9 +1,10 @@
-import game_functions
+import math
 from players import *
+from enemy import *
 from text_and_sounds_functions import *
 # import os
 # import time
-# import random
+import random
 
 
 def if_want_to_play():
@@ -100,48 +101,33 @@ def chosen_path():
 
 
 chosen_path()
+# Sounds.exploring_sound()
 
-chest_open = input("Do you open the chest?\n 'y' for yes 'n' for no!\n")
-if chosen_character == Warrior:
+
+def if_open_chest():
+    print(f"This are you weapons now: \n{chosen_character().type_of_weapon} - {chosen_character().weapon}\n"
+          f"{chosen_character().type_of_armour} - {chosen_character().armour}\n")
+    chest_open = input("Do you open the chest?\n 'y' for yes 'n' for no!\n")
     if chest_open == "y":
-        game_functions.random_items_warrior()
-        print(Warrior().inventory)
+        chosen_character().open_chest()
+        chosen_character().total_points()
+        print(f"This are you new weapons: \n{chosen_character().type_of_weapon} - {chosen_character().weapon}\n"
+            f"{chosen_character().type_of_armour} - {chosen_character().armour}\n")
     elif chest_open == "n":
         print("You move on with what do you already have!")
     else:
-        print("Chose a valid option!")
-elif chosen_character == Wizard:
-    if chest_open == "y":
-        game_functions.random_items_wizard()
-        print(Wizard().inventory)
-    elif chest_open == "n":
-        print("You move on with what do you already have!")
-    else:
-        print("Chose a valid option!")
-elif chosen_character == Elf:
-    if chest_open == "y":
-        game_functions.random_item_elf()
-        print(Elf().inventory)
-    elif chest_open == "n":
-        print("You move on with what do you already have!")
-    else:
-        print("Chose a valid option!")
+        print("Choose a valid option!")
 
-elif chosen_character == Archer:
-    if chest_open == "y":
-        game_functions.random_item_archer()
-        print(Archer().inventory)
-    elif chest_open == "n":
-        print("You move on with what do you already have!")
-
-    else:
-        print("Chose a valid option!")
+if_open_chest()
 
 
-# to do
-# to create the battle function
-    # let the random function decide with who is the player fighting
-    # with random and time, do a function in which they hit each other and decrease their life and armour
-    # for each character the hit points are different
-    # the first who runs out of life, dies
-    # print the final message
+def battle_scene(user, enemy):
+
+    user.attack(enemy)
+    print(f"You are attacking with a power of {user.power}, your have {user.life} ")
+    enemy.attack(user)
+    print(f'{enemy.type_of} is attacking you with a power of {enemy.power} and he has {enemy.life} left\n')
+    if user.life <= 0:
+        print(f"Our {user.type_of} has been killed by a {enemy.type_of}!")
+    elif enemy.hp <= 0:
+        print(f'Well done grand {user.type_of}!!! You defeated the {enemy.type_of}\n')
